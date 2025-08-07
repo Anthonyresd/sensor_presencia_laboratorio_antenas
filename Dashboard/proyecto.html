@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Sensor Tuya - Laboratorio UNL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="proyecto.css">
+</head>
+<body>
+    <header class="header-container">
+        <div class="header-content">
+            <img src="https://univercimas.com/wp-content/uploads/2021/04/Universidad-Nacional-de-Loja-UNL.png" class="logo" alt="Logo UNL">
+            <div class="header-text">
+                <h1><i class="fas fa-radar"></i> Sistema de Monitoreo Sensor Tuya</h1>
+                <h2>Laboratorio de Telecomunicaciones - Universidad Nacional de Loja</h2>
+            </div>
+        </div>
+        <div class="status-bar">
+            <div class="connection-status">
+                <div class="status-indicator" id="connectionStatus"></div>
+                <span>Conexión al Sensor</span>
+                <span id="connectionText">Conectado</span>
+            </div>
+            <div class="last-update">
+                <i class="fas fa-clock"></i>
+                <span>Última actualización: <span id="lastUpdate">--</span></span>
+            </div>
+            <div>
+                <i class="fas fa-database"></i>
+                <span>Datos en tiempo real cada 5 segundos</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="metrics-overview">
+            <div class="metric-card presence-card">
+                <div class="presence-indicator" id="presenceIndicator">
+                    <i class="fas fa-user" id="presenceIcon"></i>
+                </div>
+                <div class="metric-value" id="presenceText">Iniciando...</div>
+                <div class="metric-label">Estado de Presencia</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-adjust"></i></div>
+                <div class="metric-value" id="sensitivityValue">--</div>
+                <div class="metric-label">Sensibilidad Actual</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="metric-value" id="nearValue">-- m</div>
+                <div class="metric-label">Detección Cercana</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-eye"></i></div>
+                <div class="metric-value" id="farValue">-- m</div>
+                <div class="metric-label">Detección Lejana</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-location-arrow"></i></div>
+                <div class="metric-value" id="targetValue">-- m</div>
+                <div class="metric-label">Objetivo más Cercano</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-sliders-h" style="color: #ff6b6b;"></i>
+                        Sensibilidad del Sensor
+                    </h3>
+                    <div class="chart-info">
+                        <div class="current-value" id="sensitivityCurrent">--</div>
+                        <small>Nivel Actual</small>
+                    </div>
+                </div>
+                <canvas id="chart-sensitivity" class="chart-canvas"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-crosshairs" style="color: #4dabf7;"></i>
+                        Detección Cercana
+                    </h3>
+                    <div class="chart-info">
+                        <div class="current-value" id="nearCurrent">-- m</div>
+                        <small>Distancia Actual</small>
+                    </div>
+                </div>
+                <canvas id="chart-near" class="chart-canvas"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-eye" style="color: #51cf66;"></i>
+                        Detección Lejana
+                    </h3>
+                    <div class="chart-info">
+                        <div class="current-value" id="farCurrent">-- m</div>
+                        <small>Distancia Actual</small>
+                    </div>
+                </div>
+                <canvas id="chart-far" class="chart-canvas"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-bullseye" style="color: #ffd43b;"></i>
+                        Objetivo más Cercano
+                    </h3>
+                    <div class="chart-info">
+                        <div class="current-value" id="targetCurrent">-- m</div>
+                        <small>Distancia Medida</small>
+                    </div>
+                </div>
+                <canvas id="chart-target" class="chart-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p><i class="fas fa-university"></i> Universidad Nacional de Loja - Laboratorio de Telecomunicaciones</p>
+            <p><i class="fas fa-wifi"></i> Sistema IoT de Monitoreo en Tiempo Real</p>
+        </div>
+    </main>
+
+    <script src="proyecto.js"></script>
+</body>
+</html>
